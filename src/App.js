@@ -5,10 +5,11 @@ import Posts from "./Containers/Posts";
 import Rapper from "./Containers/Rapper";
 
 function App() {
-  const [newPost, showNewPost] = useState(true);
+  const [data, setData] = useState([]);
+  const [newPost, showNewPost] = useState(false);
   return (
     <div
-      className={newPost ? "z-1 blur-md max-w-[2000px]" : "max-w-[2000px]  "}
+      className={newPost ? "z-1 max-w-[2000px]" : "max-w-[2000px]  "}
       onClick={() => {
         showNewPost(false);
       }}
@@ -26,8 +27,12 @@ function App() {
             Create A Post
           </button>
         </div>
-        <Posts />
-        {newPost ? <CreatePost setModal={showNewPost} /> : ""}
+        <Posts data={data} setData={setData} />
+        {newPost ? (
+          <CreatePost data={data} setData={setData} setModal={showNewPost} />
+        ) : (
+          ""
+        )}
       </Rapper>
     </div>
   );

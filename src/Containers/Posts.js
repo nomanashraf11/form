@@ -1,11 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { getData } from "../api/requests";
 import Post from "../components/Post";
 
-const Posts = () => {
+const Posts = (props) => {
+  const { data, setData } = props;
+  useEffect(() => {
+    const forums = async () => {
+      const { data } = await getData();
+      setData(data.data);
+    };
+    forums();
+  }, []);
+
   return (
     <div className="mt-10">
-      {[2, 4, 2, 2, 1].map((el) => {
-        return <Post />;
+      {data.map((el) => {
+        return <Post key={el.id} description={el.review} id={el.id} />;
       })}
     </div>
   );

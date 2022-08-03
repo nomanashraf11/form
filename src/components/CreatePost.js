@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { getData, newForum } from "../api/requests";
 
 const CreatePost = (props) => {
   const { setModal } = props;
+  const { data, setData } = props;
   const [comment, setComment] = useState();
   console.log(comment);
   return (
@@ -33,13 +35,17 @@ const CreatePost = (props) => {
       <div className="flex justify-end mr-12">
         <button
           className=" px-6 py-2 rounded-md shadow-lg text-[grey] text-[20px] mb-14"
-          onClick={() => {
+          onClick={async () => {
+            await newForum(comment);
+            const { data } = await getData();
+            setData(data.data);
             Swal.fire({
               title: "POST",
               icon: "success",
               timer: 2000,
               confirmButtonText: "Close",
             });
+            setModal(false);
           }}
         >
           post

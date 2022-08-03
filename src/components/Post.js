@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Heart from "./Heart";
 
-const Post = () => {
+const Post = (props) => {
+  const { description, id } = props;
   const [color, setColor] = useState("grey");
   const [showComment, setShowComment] = useState(false);
 
@@ -19,12 +20,7 @@ const Post = () => {
         <p className="text-[grey]">21 aprl,22</p>
       </div>
       <div className="ml-12 ">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam debitis
-          architecto illo voluptates, possimus quae doloremque atque
-          exercitationem omnis non dolores dolore? Sint sed eius aut ratione,
-          non optio repellendus.s
-        </p>
+        <p>{description}</p>
       </div>
       <div className="flex justify-start items-center space-x-5 mt-5 ml-12">
         <div
